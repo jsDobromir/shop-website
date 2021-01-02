@@ -1,0 +1,24 @@
+extends layout.pug
+
+block content
+    //- if locals.flashes.error
+    //-     .errorDivFlash
+    //-         h3=flashes.error 
+    .formDiv
+        h3 Add Product
+        form(action="/admin/products" method="POST" enctype="multipart/form-data")
+            .form-group
+                label(for="title") Product Title
+                input(type="text" name="title" id="title" placeholder="Enter a Product title")
+            .form-group
+                label(for="price") Price
+                input(type="number" name="price" id="price" min="1" step="any" placeholder="Enter a price")
+            .form-group
+                label(for="description") Product Description
+                textarea(name="desc", rows="5" placeholder="Enter description")
+            .form-group
+                label(form="image") Product Image
+                input(type="file" name="image" id="image" accept="image/gif, image/png, image/jpeg")
+            .form-group
+                input(type="submit" value="Add a Product" class="btn")
+            
