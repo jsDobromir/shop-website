@@ -10,7 +10,7 @@ router.route('/products')
 router.route('/manageproducts')
     .get(manageProductsView);
 
-router.get('/editproduct/:title',editProduct)
-    .post('/editproduct/:title',editProductPost);
+router.get('/editproduct/:productId',editProduct)
+    .post('/editproduct/:productId',editProductPost);
 
 router.post('/deleteproduct/:id',deleteProduct);

@@ -1,0 +1,12 @@
+extends layout.pug
+
+block content
+    if locals.orders
+        each order in orders
+            .orderDiv
+                each product in order
+                    .productDiv
+                        h3=product.title
+                        h3 Quantity : #{product.quantity}
+    else
+        h2 There are no orders from <span>#{name}</span> yet

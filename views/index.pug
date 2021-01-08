@@ -7,12 +7,12 @@ block content
             each product in products
                 div(class="productDiv"+n)
                     h3=product.title
-                    p=product.desc
-                    img(src=`/uploads/${product.image}` alt="Image")
-                    p=product.price
+                    p#descP=product.description
+                    img(src=`/uploads/${product.imageUrl}` alt="Image")
+                    p#priceP=product.price
                     .buttonsDiv
                         button(class="addToCart"+n++) Add To Cart
-                        a(href=`/shop/product/${product.id}`) Details
+                        a(href=`/shop/product/${product._id}`) Details
 
     else
         h3 There are no products at the moment

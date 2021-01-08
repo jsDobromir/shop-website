@@ -6,7 +6,7 @@ block content
     //-         h3=flashes.error 
     .formDiv
         h3 Edit Product
-        form(action=`/admin/editproduct/${product.title}` method="POST")
+        form(action=`/admin/editproduct/${product._id}` method="POST")
             .form-group
                 label(for="title") Edit Product
                 input(type="text" name="title" id="title" placeholder="Enter a Product title" value=product.title)
@@ -15,12 +15,13 @@ block content
                 input(type="number" name="price" id="price" min="1" step="any" placeholder="Enter a price" value=product.price)
             .form-group
                 label(for="description") Product Description
-                textarea(name="desc", rows="5" placeholder="Enter description")=product.desc
+                textarea(name="desc", rows="5" placeholder="Enter description")=product.description
             .form-group
                 label(form="image") Product Image
                 input(type="file" name="image" id="image" accept="image/gif, image/png, image/jpeg")
                 .formImageDiv
-                    img(src=`/uploads/${product.image}` alt="Product Image")
+                    img(src=`/uploads/${product.imageUrl}` alt="Product Image")
+                input(type="hidden" name="imageValue" id="imageValue" value=product.imageUrl)
             .form-group
                 input(type="submit" value="Add a Product" class="btn")
             

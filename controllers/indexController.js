@@ -1,14 +1,23 @@
 import Product from '../models/product.js';
 
 
-export const renderShop = (req,res) => {
-    Product.fetchAll(products => {
-        res.render('index',{products,title : 'Index Page'});
-    });
+export const renderShop = async (req,res) => {
+    Product.fetchAll()
+        .then(products => {
+            res.render('index',{products,title : 'Index Page'});
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    
 };
 
 
 export const getCart = (req,res) => {
 
-    res.render('cart',{title : 'Cart'});
+    req.user.getCart()
+        .then(products => {
+            res.render('cart',{title : 'Cart',products});
+        })
+        .catch(err => console.log(err));
 };

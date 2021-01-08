@@ -2,3 +2,13 @@ extends layout.pug
 
 block content
     .cartPageDiv
+        each product in products
+            h2=product.title
+            h3=product.price
+            h1 Quantity: #{product.quantity}
+            form(action=`/shop/deleteProduct/${product._id}` method="POST")
+                input(type="submit" value="Delete Product")
+        
+        .orderNowDiv
+            form(action=`/shop/order/` method="POST")
+                input(type="submit" value="Create Order" class="buttonOrder")

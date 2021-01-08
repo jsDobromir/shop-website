@@ -265,3 +265,26 @@ div[class^="productDiv"] button:hover {
     height: auto;
     object-fit: cover;
 }
+
+.orderNowDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.orderNowDiv .buttonOrder {
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: black;
+}
+.orderNowDiv .buttonOrder:hover {
+    color: black;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.orderDiv{
+    border-bottom: 1rem solid #28a745;
+}
