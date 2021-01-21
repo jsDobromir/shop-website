@@ -1,0 +1,15 @@
+extends ../layout.pug
+
+block content
+    if errors
+        each error in errors
+            .errorMessage
+                h3=error
+    .formDiv
+        form(action="/auth/reset" method="POST")
+            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+            .form-group
+                label(for="email") Email
+                input(type="email" name="email" placeholder="Enter your Email and we will send you instructions")
+            .form-group
+                input(type="submit" value="Reset Password" class="btn")

@@ -1,0 +1,26 @@
+extends ../layout.pug
+
+block content
+    if errors
+        each error in errors
+            .errorMessage
+                h3=error.msg
+
+
+    .formDiv
+        form(action="/auth/register" method="POST" novalidate)
+            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+            .form-group
+                label(for="username") Username
+                input(type="text"  name="username" placeholder="Enter your Usernmae" value=`${oldInfo.username ? oldInfo.username : ''}`)
+            .form-group
+                label(for="email") Email
+                input(type="email" class=`${errors ? (errors.find(e => e.param==='email') ? 'redBorder' : '') : ''}` name="email" placeholder="Enter your Email" value=`${oldInfo.email ? oldInfo.email : ''}`)
+            .form-group
+                label(for="password") Password
+                input(type="password" class=`${errors ? (errors.find(e => e.param==='password') ? 'redBorder' : '') : ''}`  name="password" placeholder="Enter your Password" value=`${oldInfo.password ? oldInfo.password : ''}`)
+            .form-group
+                label(for="confirmPassword") Confirm Password
+                input(type="password" class=`${errors ? (errors.find(e => e.param==='password2') ? 'redBorder' : '') : ''}` name="password2" placeholder="Confirm your Password" value=`${oldInfo.password2 ? oldInfo.password2 : ''}`)
+            .form-group
+                input(type="submit" value="Register" class="btn")

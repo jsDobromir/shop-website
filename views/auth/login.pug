@@ -1,0 +1,31 @@
+extends ../layout.pug
+
+block content
+
+    if success
+        each succ in success
+            .successMessage
+                h3=succ
+
+    if errors
+        each error in errors
+            .errorMessage
+                h3=error.msg
+    
+
+    .formDiv
+        form(action="/auth/login" method="POST")
+            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+            .form-group
+                label(for="email") Email
+                input(type="email" class=`${errors ? (errors.find(e => e.param==='email') ? 'redBorder' : '') : ''}` name="email" placeholder="Enter your Email" value=`${oldInfo.email}`)
+            .form-group
+                label(for="password") Password
+                input(type="password" class=`${errors ? (errors.find(e => e.param==='password') ? 'redBorder' : '') : ''}` name="password" placeholder="Enter your Password" value=`${oldInfo.password}`)
+            .form-group
+                input(type="submit" value="Login" class="btn")
+
+    h2.resetPass
+        | Forgot your password ? No problem 
+        a(href="/auth/reset") Reset 
+        | it here

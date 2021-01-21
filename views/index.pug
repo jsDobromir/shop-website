@@ -8,10 +8,12 @@ block content
                 div(class="productDiv"+n)
                     h3=product.title
                     p#descP=product.description
-                    img(src=`/uploads/${product.imageUrl}` alt="Image")
+                    img(src=`/${product.imageUrl}` alt="Image")
                     p#priceP=product.price
                     .buttonsDiv
-                        button(class="addToCart"+n++) Add To Cart
+                        if isAuth
+                            button(class="addToCart"+n++) Add To Cart
+                            input(type="hidden" id="hidden" name="_csrf" value=`${csrfToken}`)
                         a(href=`/shop/product/${product._id}`) Details
 
     else

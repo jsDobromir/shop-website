@@ -4,9 +4,12 @@ block content
     if locals.orders
         each order in orders
             .orderDiv
-                each product in order
-                    .productDiv
-                        h3=product.title
-                        h3 Quantity : #{product.quantity}
+                each product in order.items
+                    .productDivOrder
+                        p Order #{product.productId._id}
+                        h3=product.productId.title
+                        h3
+                            | Quantity : #{product.quantity} - 
+                            a(href=`/shop/orders/${order.id}`) Invoice 
     else
-        h2 There are no orders from <span>#{name}</span> yet
+        h2 There are no orders from you yet

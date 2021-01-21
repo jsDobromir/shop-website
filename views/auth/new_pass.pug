@@ -1,0 +1,20 @@
+extends ../layout.pug
+
+block content
+    if errors
+        each error in errors
+            .errorMessage
+                h3=error
+    .formDiv
+        form(action="/auth/resetPassword" method="POST")
+            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+            .form-group
+                label(for="email") New Password
+                input(type="password" name="password" placeholder="Enter your new password")
+            .form-group
+                label(for="password") Password Confirm
+                input(type="password" name="password2" placeholder="Confirm your password")
+                input(type="hidden" name="passportToken" value=`${passportToken}`)
+                input(type="hidden" name="userId" value=`${userId}`) 
+            .form-group
+                input(type="submit" value="Update Password" class="btn")

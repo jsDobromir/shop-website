@@ -3,12 +3,14 @@ extends layout.pug
 block content
     .cartPageDiv
         each product in products
-            h2=product.title
-            h3=product.price
+            h2=product.productId.title
+            h3=product.productId.price
             h1 Quantity: #{product.quantity}
-            form(action=`/shop/deleteProduct/${product._id}` method="POST")
+            form(action=`/shop/deleteProduct/${product.productId._id}` method="POST")
+                input(type="hidden" name="_csrf" value=`${csrfToken}`)
                 input(type="submit" value="Delete Product")
-        
-        .orderNowDiv
-            form(action=`/shop/order/` method="POST")
-                input(type="submit" value="Create Order" class="buttonOrder")
+        if locals.products.length>0
+            .orderNowDiv
+                form(action=`/shop/order/` method="POST")
+                    input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                    input(type="submit" value="Create Order" class="buttonOrder")

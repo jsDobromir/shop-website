@@ -56,6 +56,17 @@ header nav .authDiv .authMen {
     align-items: center;
     text-align: center;
 }
+
+header nav .authDiv .authMen form button {
+    font-size: 1.5rem;
+    background-color: salmon;
+    color: white;
+    padding: 0.7rem;
+}
+
+header nav .authDiv .authMen form button:hover {
+    cursor: pointer;
+}
 header nav .authDiv .authMen li a i{
    color: black;
 }
@@ -94,10 +105,35 @@ header nav .itemsDiv ul li:nth-child(n+2) a{
 
 
 .container {
-    max-width: 60%;
+    max-width: 80%;
     margin: 2rem auto;
 }
 
+.errorMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: rgb(34, 32, 32);
+    background: red;
+    border-radius: 1rem;
+    width: 80%;
+    padding: 1rem;
+    margin: 1rem auto;
+}
+
+.successMessage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: rgb(34, 32, 32);
+    background: rgb(139, 238, 81);
+    border-radius: 1rem;
+    width: 80%;
+    padding: 1rem;
+    margin: 1rem auto;
+}
 
 /* Form Div*/
 .formDiv {
@@ -187,7 +223,7 @@ div[class^="productDiv"]{
 }
 
 div[class^="productDiv"] img {
-    max-width: 95%;
+    max-width: 100%;
     max-height: 250px;
     object-fit: cover;
 }
@@ -286,5 +322,32 @@ div[class^="productDiv"] button:hover {
 }
 
 .orderDiv{
-    border-bottom: 1rem solid #28a745;
+    max-width: 100%;
+    border: .5rem solid #28a745;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productDivOrder {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.resetPass {
+    margin: 2rem auto;
+    text-align: center;
+    color: white;
+}
+
+.resetPass a {
+    color: rgb(232, 235, 59);
+    font-size: 2rem;
+}
+
+form input.redBorder {
+    border-color: red;
 }

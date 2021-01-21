@@ -4,24 +4,28 @@ block content
     //- if locals.flashes.error
     //-     .errorDivFlash
     //-         h3=flashes.error 
+
+    if errors
+        each error in errors
+            .errorMessage
+                h3=error.msg
+
     .formDiv
         h3 Edit Product
-        form(action=`/admin/editproduct/${product._id}` method="POST")
+        form(action=`/admin/editproduct/${oldInfo.prodId}/?_csrf=${csrfToken}` method="POST" enctype="multipart/form-data")
             .form-group
                 label(for="title") Edit Product
-                input(type="text" name="title" id="title" placeholder="Enter a Product title" value=product.title)
+                input(type="text" name="title" id="title" placeholder="Enter a Product title" value=`${oldInfo.title}`)
             .form-group
                 label(for="price") Price
-                input(type="number" name="price" id="price" min="1" step="any" placeholder="Enter a price" value=product.price)
+                input(type="number" name="price" id="price" min="1" step="any" placeholder="Enter a price" value=`${oldInfo.price}`)
             .form-group
                 label(for="description") Product Description
-                textarea(name="desc", rows="5" placeholder="Enter description")=product.description
+                textarea(name="desc", rows="5" placeholder="Enter description")=oldInfo.description
             .form-group
                 label(form="image") Product Image
-                input(type="file" name="image" id="image" accept="image/gif, image/png, image/jpeg")
-                .formImageDiv
-                    img(src=`/uploads/${product.imageUrl}` alt="Product Image")
-                input(type="hidden" name="imageValue" id="imageValue" value=product.imageUrl)
+                input(type="file" name="image" id="image" accept="image/gif, image/png, image/jpeg" value=`${oldInfo.imageUrl}`)
+                input(type="hidden" name="imageValue" id="imageValue")
             .form-group
                 input(type="submit" value="Add a Product" class="btn")
             

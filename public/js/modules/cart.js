@@ -1,32 +1,28 @@
 export async function addToCart() {
     
     let buttons = document.querySelectorAll("[class^='addToCart']");
-    //let count = await getCartLength();
-    //console.log(count);
     buttons.forEach(butt => {
-        butt.addEventListener('click',(e) => {
+        butt.addEventListener('click',async (e) => {
             let id = butt.className.replace(/^\D+/g,'');
             let divVar ="productDiv"+id;
             const targetDiv =document.querySelector('.'+divVar);
 
             let atag = targetDiv.querySelector(".buttonsDiv").querySelector("a").getAttribute("href");
 
+            let hiddenValue = targetDiv.querySelector("#hidden").value;
+
             let userId = atag.split("/")[3];
 
+            let ans = await getLengthOnIncrement();
+            console.log(ans);
+            let span = document.querySelector("#cartSpan");
+            span.innerHTML = ++ans;
+            
+            
             alert(userId);
             
-            // const title = targetDiv.querySelector('h3').textContent;
-            // const desc = targetDiv.querySelector('#descP').textContent;
-            // const price = targetDiv.querySelector('#priceP').textContent;
-            // let img = targetDiv.querySelector('img').src;
-            // img = img.split('/uploads/')[1];
-            // let obj = {title,desc,price,image : img};
-            // console.log(obj);
-            //let span = document.querySelector("#cartSpan");
-            //span.innerHTML = ++count;
             
-            
-            sendCartData({userId : userId});
+            sendCartData({userId : userId, _csrf : hiddenValue});
 
         });
     });
@@ -45,19 +41,43 @@ async function sendCartData(obj) {
     const content = await rawResponse.json();
 }
 
-export async function getCartLength(){
+const getLengthOnIncrement = async () => {
 
-    const rawResponse = await fetch('http://localhost:9000/shop/getCartLength',{
+    let rawResponse = await fetch('http://localhost:9000/shop/getCartLength',{
         headers : { 
             'Content-Type': 'application/json',
             'Accept': 'application/json'
            }
     });
 
-    const jsonResp = await rawResponse.json();
+    let jsonResponse = await rawResponse.json();
+    let quant = jsonResponse.quantity;
+    return quant;
+}
 
-    if(jsonResp.quantity>0){
-        let span = document.querySelector("#cartSpan");
-        span.innerHTML = jsonResp.quantity;
-    }
-};
+// export async function getCartLength(){
+
+//     fetch('http://localhost:9000/shop/getCartLength',{
+//         headers : { 
+//             'Content-Type': 'application/json',
+//             'Accept': 'application/json'
+//            }
+//     })
+//     .then(rawResponse => {
+//         return rawResponse.json();
+//     })
+//     .then(jsonResp => {
+//         console.log(jsonResp);
+//         if(jsonResp.quantity===0){
+//             let span = document.querySelector("#cartSpan");
+//             span.innerHTML = 'No items in cart';
+//         }
+//         else if(jsonResp.quantity>0){
+//             let span = document.querySelector("#cartSpan");
+//             span.innerHTML = jsonResp.quantity;
+//         }
+//     })
+//     .catch(err => {
+//         console.log(err);
+//     });
+// };

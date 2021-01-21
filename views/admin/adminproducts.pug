@@ -8,11 +8,12 @@ block content
                 div(class="productDiv"+n)
                     h3=product.title
                     p=product.desc
-                    img(src=`/uploads/${product.imageUrl}` alt="Image")
+                    img(src=`/${product.imageUrl}` alt="Image")
                     p=product.price
                     .editDelete
                         a(href=`/admin/editproduct/${product._id}` id="edit") Edit
                         form(action=`/admin/deleteproduct/${product._id}` method="POST")
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
                             button(type="submit" id="delete") Delete
     else
         h3 There are no products at the moment

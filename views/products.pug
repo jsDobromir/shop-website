@@ -4,21 +4,27 @@ block content
     //- if locals.flashes.error
     //-     .errorDivFlash
     //-         h3=flashes.error 
+
+    if errors
+        each error in errors
+            .errorMessage
+                h3=error.msg
+
     .formDiv
         h3 Add Product
-        form(action="/admin/products" method="POST" enctype="multipart/form-data")
+        form(action=`/admin/products/?_csrf=${csrfToken}` method="POST" enctype="multipart/form-data")
             .form-group
                 label(for="title") Product Title
-                input(type="text" name="title" id="title" placeholder="Enter a Product title")
+                input(type="text" name="title" id="title" placeholder="Enter a Product title" value=`${oldInfo.title}`)
             .form-group
                 label(for="price") Price
-                input(type="number" name="price" id="price" min="1" step="any" placeholder="Enter a price")
+                input(type="number" name="price" id="price" min="1" step="any" placeholder="Enter a price" value=`${oldInfo.price}`)
             .form-group
                 label(for="description") Product Description
-                textarea(name="desc", rows="5" placeholder="Enter description")
+                textarea(name="desc", rows="5" placeholder="Enter description") #{oldInfo.description}
             .form-group
                 label(form="image") Product Image
-                input(type="file" name="image" id="image" accept="image/gif, image/png, image/jpeg")
+                input(type="file" name="image" id="image")
             .form-group
                 input(type="submit" value="Add a Product" class="btn")
             

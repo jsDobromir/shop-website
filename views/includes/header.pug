@@ -9,16 +9,24 @@ header
                     a(href="/admin/products") Add Product
                 li
                     a(href="/admin/manageproducts") Manage Products
-                li
-                    a(href="/shop/orderView") My Orders
+                if isAuth
+                    li
+                        a(href="/shop/orderView") My Orders
         .authDiv
             ul.authMen
-                li
-                    a(href="/login") Login
-                li
-                    a(href="/register") Register
-                li
-                    .cartDiv
-                        a(href="/cart")
-                            i.fas.fa-shopping-cart.fa-3x
-                        span#cartSpan
+                
+                if isAuth===undefined
+                    li
+                        a(href="/auth/login") Login
+                    li
+                        a(href="/auth/register") Register
+                if isAuth
+                    li
+                        form(action="/auth/logout" method="post")
+                            input(type="hidden" name="_csrf" value=`${csrfToken}`)
+                            button(type="submit") Logout
+                    li
+                        .cartDiv
+                            a(href="/cart")
+                                i.fas.fa-shopping-cart.fa-3x
+                            span(id="cartSpan")=cartLength
